@@ -1,0 +1,121 @@
+﻿@model ML.Empleado
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <div class="text-center">
+            <h2>Empleados.</h2>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <h5>Seleccione un empleado para editarlo u el boton + para agregar un empleado...</h5>
+                <hr />
+            </div>
+        </div>
+
+
+        <div style="float:right;">
+            @Html.ActionLink("+", "Form", "Empleado", htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+        @if (Model.Empleados == null)
+        {
+            <div class="p-3 mb-2 bg-danger text-white">Aun no hay empleados registrados</div>
+        }
+        else
+        {
+            @*  <div style="overflow-x:auto;">*@
+
+            <br />
+            <table class="table   table-hover  " id="tblEmpleado">
+                <thead>
+                 
+                    <tr style="color: White; background-color: #00B140; font-size: Medium; font-weight: bold; padding: 8px" role="row">
+
+                        <td class="text-center">Editar</td>
+                        <td style="display :none;">IdEmpleado</td>
+                        <td class="text-center">Nombre</td>
+                        <td class="text-center">Edad</td>
+                        <td class="text-center">Email</td>
+                        <td style="display :none;">IdArea</td>
+                        <td class="text-center">Area</td>
+                        <td class="text-center">Imagen</td>
+                        <td class="text-center">Eliminar</td>
+                    
+                </thead>
+                <tbody>
+                    @foreach (ML.Empleado empleado in Model.Empleados)
+                    {
+                        <tr>
+                            <td class="text-center"><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Empleado", new { IdEmpleado = empleado.IdEmpleado })"></a></td>
+
+                            <td style="display :none;">@empleado.IdEmpleado</td>
+
+                            <td class="text-center">@empleado.NombreEmpleado  @empleado.SegundoNombreEmpleado @empleado.ApellidoPaternoEmpleado @empleado.ApellidoMaternoEmpleado</td>
+
+                            <td class="text-center">@empleado.Edad</td>
+                            <td class="text-center">@empleado.Email</td>
+
+
+
+
+                            <td style="display :none;">@empleado.Area.IdArea</td>
+                            <td class="text-center">@empleado.Area.NombreArea</td>
+
+                            <td>
+                                @if (empleado.Imagen == null || empleado.Imagen == "" || empleado.Imagen == " ")
+                                {
+                                    <img class="card-Img" src="~/Imagenes/SinRostro.jpg" style="width:110px ; height:110px" />
+
+
+                                }
+                                else
+                                {
+                                    <img class="card-Img" src="data:image/*;base64,@empleado.Imagen" style="width:110px ; height:110px" />
+                                }
+
+                            </td>
+
+
+
+
+                            <td class="text-center"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Empleado", new { IdEmpleado = empleado.IdEmpleado})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            @* </div>*@
+        }
+    </div>
+
+    @section Scripts
+    {
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.material.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+    <script type="text/javascript">
+         $(document).ready(function () {
+             
+            $('#tblEmpleado').DataTable({
+                searching: false,
+                "lengthMenu": [[3, 6, 9, 12, -1], [3, 6, 9, 12, "All"]],
+                autoWidth: false,
+                columnDefs: [
+                    {
+                        targets: ['_all'],
+                        className: 'mdc-data-table__cell',
+                    },
+                ],
+                
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Spanish.json",
+                },
+             });
+        });
+    </script>
+    }
+

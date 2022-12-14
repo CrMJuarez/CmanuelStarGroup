@@ -1,0 +1,60 @@
+﻿@model ML.Rol
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <h2>Roles</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <h5>Seleccione una rol para editarlo u el boton + para agregar un nuevo rol...</h5>
+            <hr />
+        </div>
+    </div>
+    <div style="float:right;">
+        @Html.ActionLink("+", "Form", "Rol", htmlAttributes: new { @class = "btn btn-success" })
+    </div>
+    @if (Model.Roles == null)
+    {
+        <div class="p-3 mb-2 bg-danger text-white">Aun no hay roles registrados</div>
+    }
+    else
+    {
+        @*  <div style="overflow-x:auto;">*@
+
+
+        <table class="table table-bordered">
+            <thead>
+                <tr style="color: White; background-color: #00B140; font-size: Medium; font-weight: bold; padding: 8px" role="row">
+
+                    <td class="text-center">Editar</td>
+
+                    <td style="display :none;">IdRol</td>
+                    <td class="text-center">Nombre</td>
+                    @*<td class="text-center">ApellidoPaterno</td>
+                <td class="text-center">ApellidoMaterno</td>*@
+                    <td class="text-center">Eliminar</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ML.Rol rol in Model.Roles)
+                {
+                    <tr>
+                        <td class="text-center"><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Rol", new { IdRol = rol.IdRol })"></a></td>
+
+                        <td style="display :none;">@rol.IdRol</td>
+
+                        <td class="text-center">@rol.NombreRol</td>
+
+                        <td class="text-center"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Rol", new { IdRol = rol.IdRol})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        @* </div>*@
+    }
+</div>

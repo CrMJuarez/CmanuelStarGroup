@@ -1,0 +1,230 @@
+﻿@{
+    ViewBag.Title = "Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model ML.Empleado
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>@ViewBag.Titulo</h3>
+                <h5>Ingrese los datos</h5>
+                <hr />
+            </div>
+        </div>
+    </div>
+    @* <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Usuario/UsuarioJS.js"></script>*@
+    <div class="row">
+        <div class="col-md-12">
+            @using (Html.BeginForm("Form", "Empleado", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+                <div class="row">
+
+                    <div class="form-group" style="display: none;">
+                        @Html.LabelFor(model => model.IdEmpleado, new { @class = "control-label col-md-2 hidden" })
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(model => model.IdEmpleado, new { @class = "form-control hidden"})
+                            @Html.ValidationMessageFor(model => model.IdEmpleado)
+                            @*  @id = "txtNumeroEmpleado", @placeholder="Ejemp:0123", autocomplete = "off", @onkeypress = "return SoloNumeros(event,'lblErrorNumeroEmpleado')"})*@
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-4 pt-5">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person" style="color: limegreen"></i></span>
+                            @Html.LabelFor(model => model.NombreEmpleado, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.NombreEmpleado, new { @class = "form-control", @id = "txtNombre", @placeholder="(No puede ir vacio)", autocomplete = "off", @onkeypress = "return SoloLetras(event,'lblErrorNombre')" })
+
+                        </div>
+                        @Html.ValidationMessageFor(model => model.NombreEmpleado)
+                        @Html.Label("", null, new {@id = "lblErrorNombre"})
+                    </div>
+
+                    <div class="col-lg-4 pt-5">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person" style="color: limegreen"></i></span>
+                            @Html.LabelFor(model => model.SegundoNombreEmpleado,"Segundo nombre", new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.SegundoNombreEmpleado, new { @class = "form-control", @id = "txtSegundoNombre", @placeholder="(No puede ir vacio)", autocomplete = "off", @onkeypress = "return SoloLetras(event,'lblErrorSegunoNombre')" })
+
+
+                        </div>
+                        @Html.Label("", null, new {@id = "lblSegundoNombre"})
+                        @Html.ValidationMessageFor(model => model.SegundoNombreEmpleado)
+                    </div>
+
+
+                    <div class="col-lg-4 pt-5">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person" style="color: limegreen"></i></span>
+                            @Html.LabelFor(model => model.ApellidoPaternoEmpleado,"Apellido Paterno", new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.ApellidoPaternoEmpleado, new { @class = "form-control", @id = "txtApellidoPaterno", @placeholder="(No puede ir vacio)", autocomplete = "off", @onkeypress = "return SoloLetras(event,'lblErrorApellidoPaterno')" })
+
+
+                        </div>
+                        @Html.Label("", null, new {@id = "lblErrorApellidoPaterno"})
+                        @Html.ValidationMessageFor(model => model.ApellidoPaternoEmpleado)
+                    </div>
+
+
+                    <div class="col-lg-4 pt-5">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person" style="color: limegreen"></i></span>
+                            @Html.LabelFor(model => model.ApellidoMaternoEmpleado,"Apellido Materno", new { @class = "form-control"})
+                            @Html.TextBoxFor(model => model.ApellidoMaternoEmpleado, new { @class = "form-control", @id = "txtApellidoMaterno", @placeholder="(No puede ir vacio)", autocomplete = "off", @onkeypress = "return SoloLetras(event,'lblErrorApellidoMaterno')" })
+
+                        </div>
+                        @Html.Label("", null, new {@id = "lblErrorApellidoMaterno"})
+                        @Html.ValidationMessageFor(model => model.ApellidoMaternoEmpleado)
+                    </div>
+
+                    <div class="col-lg-4 pt-5">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person" style="color: limegreen"></i></span>
+                            @Html.LabelFor(model => model.Edad, new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.Edad, new { @class = "form-control", @id = "txtEdad",  @placeholder="(No puede ir vacio)", autocomplete = "off", @onkeypress = "return SoloNumeros(event,'lblErrorEdad')" })
+                        </div>
+                        @Html.Label("", null, new {@id = "lblErrorEdad"})
+                        @Html.ValidationMessageFor(model => model.Edad)
+                    </div>
+
+
+               
+
+
+                    <div class="col-lg-4 pt-5">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person" style="color: limegreen"></i></span>
+                            @Html.LabelFor(model => model.Email,"Email", new { @class = "form-control" })
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @id = "txtEmail", @placeholder="Ejemp:correo@stargroup.com.mx", autocomplete = "off" })
+                        </div>
+
+                        @Html.ValidationMessageFor(model => model.Email, null, new { @class = "text-danger"})
+
+                        @Html.Label("", null, new {@id = "lblEmail"})
+                    </div>
+
+
+
+                    <div class="col-lg-4 pt-5">
+                        <div class="input-group">
+                            <span class="input-group-text" id="basic-addon1"><i class="bi bi-person" style="color: limegreen"></i></span>
+                            @Html.LabelFor(model => model.Area.NombreArea,"Areas", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.Area.IdArea, new SelectList(Model.Area.Areas, "IdArea", "NombreArea"), "Selecciona una opcion", new { @class = "form-control" })
+                        </div>
+                    </div>
+
+                      <div class="col-lg-4 pt-5">
+
+        @Html.LabelFor(model=> model.Imagen)
+
+        <div class="input-group">
+            <span class="input-group-text" id="basic-addon1"><i class="bi bi-card-image"></i></span>
+            <input id="IFImage" type='file' class="form-control" name="IFImage" onchange="validateFile(this), readURL(this);  " />
+        </div>
+        
+        @if (Model.Imagen == null||Model.Imagen == ""||Model.Imagen == " ")
+        {
+          
+            <img id="Img" src="~/Imagenes/SinRostro.jpg" style="width:110px ; height:110px" />
+        }
+        else
+        {
+             <img id="Img" src="data:image/*;base64,@Model.Imagen" style="width:110px ; height:110px" />
+        }
+        @Html.HiddenFor(model=> model.Imagen)
+
+    </div>
+
+                    <div class="row ms-lg-5 pt-5">
+                        <div class="btn-group d-flex w-100" role="group">
+                            <div class="col-lg-5"></div>
+                            <input type="submit" value="@ViewBag.Accion Guardar" class="btn btn-success" />
+                            @Html.ActionLink("Regresar", "GetAll", "Empleado", htmlAttributes: new { @class = "btn btn-danger" })
+                        </div>
+                        <div class="col-lg-5"></div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+</div>
+@section Scripts
+    {
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <script type="text/javascript">
+
+
+        function SoloLetras(e, controlId) {
+            var regex = /^[a-zA-Z]+$/;
+            var letra = e.key;
+            if (regex.test(letra)) {
+                $('#' + controlId).css({ "color": "green" });
+                return true;
+            }
+            else {
+                $('#' + controlId).text("Solo se aceptan letras");
+                $('#' + controlId).css({ "color": "red" });
+                return false;
+            }
+        }
+
+        function SoloNumeros(e,controlId) 
+          {
+              var regex = /^[0-9]/;
+              var caracter = e.key;
+          if (regex.test(caracter)) {
+              $("#" + controlId).css({ "color": "green" });
+              return true;
+          }
+          else {
+              $("#" + controlId).text("Solo se aceptan numeros");
+              $("#" + controlId).css({ "color": "red" });
+              return false;
+          }
+    }
+
+        function validateFile()
+                    {
+                        var allowedExtension = ['jpeg', 'jpg', 'png'];
+                        var fileExtension = document.getElementById('IFImage').value.split('.').pop().toLowerCase();
+                        var isValidFile = false;
+                            for(var index in allowedExtension) {
+                                if(fileExtension === allowedExtension[index]) {
+                                    isValidFile = true;
+                                    break;
+                                }
+                            }
+                            if(!isValidFile) {
+                                alert('Las extensiones permitidas son : *.' + allowedExtension.join(', *.'));
+                                document.getElementById('IFImage').value = ""
+                            }
+                            return isValidFile;
+                    }
+                    function readURL(input) {
+                    if (input.files && input.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = function (e) {
+                            $('#Img')
+                              .attr('src', e.target.result);
+                        };
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+
+
+
+
+    </script>
+    }

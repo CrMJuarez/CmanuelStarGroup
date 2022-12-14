@@ -1,0 +1,61 @@
+﻿@model ML.Area
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        <h2>Areas</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <h5>Seleccione una area para editarlo u el boton + para agregar una nueva area...</h5>
+            <hr />
+        </div>
+    </div>
+    <div style="float:right;">
+        @Html.ActionLink("+", "Form", "Area", htmlAttributes: new { @class = "btn btn-success" })
+    </div>
+    @if (Model.Areas == null)
+    {
+        <div class="p-3 mb-2 bg-danger text-white">Aun no hay areas registrados</div>
+    }
+    else
+    {
+        @*  <div style="overflow-x:auto;">*@
+
+
+        <table class="table table-bordered">
+            <thead>
+                <tr style="color: White; background-color: #00B140; font-size: Medium; font-weight: bold; padding: 8px" role="row">
+
+                    <td class="text-center">Editar</td>
+
+                    <td style="display :none;">IdRol</td>
+                    <td class="text-center">Area</td>
+                    @*<td class="text-center">ApellidoPaterno</td>
+                <td class="text-center">ApellidoMaterno</td>*@
+                    <td class="text-center">Eliminar</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ML.Area area in Model.Areas)
+                {
+                    <tr>
+                        <td class="text-center"><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Area", new { IdArea = area.IdArea })"></a></td>
+
+                        <td style="display :none;">@area.IdArea</td>
+
+                        <td class="text-center">@area.NombreArea</td>
+
+                        <td class="text-center"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Area", new { IdArea = area.IdArea})" onclick="return confirm('Estas seguro que deseas eliminar este registro?');"></a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        @* </div>*@
+    }
+</div>
+
